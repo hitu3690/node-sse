@@ -1,21 +1,41 @@
-import express from "express";
-import cors from "cors";
+import express, { Request, Response } from "express";
+import cors, { CorsOptions } from "cors";
 import { sseMiddleware } from "express-sse-middleware";
 
-const app = express();
+const PORT = 4000;
 
-app.use(cors({ origin: ["http://localhost:3000"] }));
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+/** cors region */
+const options: CorsOptions = {
+  origin: ["http://localhost:3000"],
+};
+app.use(cors(options));
+/** region emd */
+
+app.get("/init", (req: Request, res: Response) => {
+  res.status(200).send({
+    message: "init",
+  });
+
+  res.writeHead(200, { "Content-Type": "text/plain" });
+  res.end("hello express\n");
+});
+
+/** sse region */
 app.use(sseMiddleware);
-app.get("/path", (req, res) => {
+app.get("/events", (req, res) => {
   const sse = res.sse();
 
   let count = 0;
   setInterval(() => {
-    console.log(res);
-    sse.send(`REST API localhost:4000`);
+    sse.send(String(count++));
   }, 4000);
 });
+/** region emd */
 
-app.listen(4000, () => {
+app.listen(PORT, () => {
   console.log(`REST API localhost:4000`);
 });
