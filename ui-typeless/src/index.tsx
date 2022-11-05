@@ -2,14 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
-import { DefaultTypelessProvider } from "./TypelessContext";
+import { Registry, TypelessContext } from "typeless";
 import reportWebVitals from "./reportWebVitals";
+
+const registry = new Registry();
 
 ReactDOM.render(
   <BrowserRouter>
-    <DefaultTypelessProvider>
+    <TypelessContext.Provider value={{ registry }}>
       <App />
-    </DefaultTypelessProvider>
+    </TypelessContext.Provider>
   </BrowserRouter>,
   document.getElementById("root")
 );

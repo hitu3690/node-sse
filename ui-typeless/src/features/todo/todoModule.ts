@@ -1,10 +1,15 @@
 import { createModule } from "typeless";
 import { from, map } from "typeless/rx";
-import * as Rx from "typeless/rx";
 
 import axios from "axios";
 import { TodoSymbol } from "./todoSymbol";
 
+export interface TodoResponse {
+  body: string;
+  id: number;
+  title: string;
+  userId: number;
+}
 export interface Todo {
   id: number;
   title: string;
@@ -23,21 +28,28 @@ const createTodoModule = () => {
   const [useTodoModule, TodoActions, getTodoState] = createModule(TodoSymbol)
     .withActions({
       fetchTodo: () => ({}),
-      fetchTodoFullfilled: (data: any) => ({ payload: data }),
+      fetchTodoFullfilled: (newTodos: Todo[]) => ({ payload: { newTodos } }),
     })
     .withState<TodoState>();
 
   useTodoModule
     .reducer(initialState)
-    .on(TodoActions.fetchTodoFullfilled, (state, { data }) => {
-      console.log(data);
+    .on(TodoActions.fetchTodoFullfilled, (state, { newTodos }) => {
+      state.todos = newTodos;
     });
 
   useTodoModule.epic().on(TodoActions.fetchTodo, () => {
     return from(axios.get("https://jsonplaceholder.typicode.com/posts")).pipe(
-      Rx.map(({ data }) => {
-        console.log(data);
-        return TodoActions.fetchTodoFullfilled(data);
+      map(({ data }) => {
+        const newTodos = data.map((item: TodoResponse) => {
+          return {
+            id: item.id,
+            title: item.title,
+            completed: false,
+            userId: item.userId,
+          };
+        });
+        return TodoActions.fetchTodoFullfilled(newTodos);
       })
     );
   });

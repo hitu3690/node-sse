@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useActions } from "typeless";
 import {
   getTodoState,
@@ -19,7 +19,7 @@ export const TodoContainer: React.FC = () => {
     <div>
       <ul>
         {todos.map((todo) => {
-          return <li>{todo.title}</li>;
+          return <li key={todo.id}>{todo.title}</li>;
         })}
       </ul>
     </div>
