@@ -1,0 +1,76 @@
+@import "../mixin";
+@import "../variables";
+
+.unifinedRadioButton {
+  > * {
+    box-sizing: border-box;
+  }
+
+  > label {
+    display: inline-block;
+    line-height: 1.2;
+
+    > span:not(:empty) {
+      margin: 0 0 0 8px;
+    }
+
+    > input {
+      position: relative;
+      opacity: 1;
+      height: 16px;
+      width: 16px;
+      border-radius: 0;
+      appearance: none;
+      vertical-align: middle;
+      cursor: pointer;
+
+      &::before,
+      &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        background-color: $palette-white;
+        border-radius: 50%;
+      }
+      &::before {
+        border: 1px solid $unified-very-light-gray;
+        width: 14px;
+        height: 14px;
+        top: -1px;
+        left: 0px;
+      }
+      &::after {
+        width: 8px;
+        height: 8px;
+        top: 3px;
+        left: 4px;
+        border: none;
+      }
+
+      &:checked::before {
+        background-color: $unified-cobalt-stone-blue;
+        border: 1px solid $unified-cobalt-stone-blue;
+      }
+
+      &:hover {
+        @include hoverBase;
+      }
+    }
+
+    &.disabled,
+    &.readOnly {
+      > input:checked::before {
+        border: solid 1px $unified-very-light-gray;
+        background-color: $unified-very-light-gray;
+      }
+    }
+    &.disabled {
+      @include disabledBase;
+    }
+    &.readOnly:not(.disabled) {
+    }
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
