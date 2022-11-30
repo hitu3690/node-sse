@@ -16,6 +16,7 @@
     "@types/xml2js": "^0.4.9",
     "axios": "^0.26.0",
     "buffer": "^6.0.3",
+    "classnames": "^2.3.2",
     "http-proxy-middleware": "^2.0.3",
     "http-status-codes": "^2.2.0",
     "lodash": "^4.17.21",
@@ -40,12 +41,24 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      }
     ]
   },
   "browserslist": {
@@ -61,6 +74,30 @@
     ]
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.188"
+    "@storybook/addon-actions": "^6.5.13",
+    "@storybook/addon-console": "^1.2.3",
+    "@storybook/addon-essentials": "^6.5.13",
+    "@storybook/addon-info": "^5.3.21",
+    "@storybook/addon-interactions": "^6.5.13",
+    "@storybook/addon-knobs": "^6.4.0",
+    "@storybook/addon-links": "^6.5.13",
+    "@storybook/addon-storysource": "^6.5.13",
+    "@storybook/addon-viewport": "^6.5.13",
+    "@storybook/builder-webpack5": "^6.5.13",
+    "@storybook/manager-webpack5": "^6.5.13",
+    "@storybook/node-logger": "^6.5.13",
+    "@storybook/preset-create-react-app": "^4.1.2",
+    "@storybook/react": "^6.5.13",
+    "@storybook/testing-library": "^0.0.13",
+    "@types/lodash": "^4.14.188",
+    "@types/storybook__addon-actions": "^5.2.1",
+    "@types/storybook__addon-info": "^5.2.5",
+    "@types/storybook__addon-knobs": "^5.2.1",
+    "@types/storybook__react": "^5.2.1",
+    "babel-plugin-named-exports-order": "^0.0.2",
+    "core-js": "^2.6.12",
+    "prop-types": "^15.8.1",
+    "react-docgen-typescript-loader": "^3.7.2",
+    "webpack": "^5.75.0"
   }
 }

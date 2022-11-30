@@ -1,0 +1,17 @@
+@import "./_variables";
+
+@mixin hoverBase {
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+
+@mixin inactiveBase {
+  cursor: default;
+  transition: none;
+  pointer-events: none;
+}
+
+@mixin disabledBase {
+  @include inactiveBase;
+  color: $palette-disabled;
+}

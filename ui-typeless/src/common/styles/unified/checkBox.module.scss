@@ -1,0 +1,105 @@
+@import "../mixin";
+@import "../variables";
+
+.unifiedCheckBox {
+  > * {
+    box-sizing: border-box;
+  }
+
+  > label {
+    display: inline-block;
+    line-height: 1.2;
+
+    input.check[type="checkbox"] {
+      position: relative;
+      left: unset; // base_cssを打ち消し
+      height: 16px;
+      width: 16px;
+      padding: 0;
+      vertical-align: middle;
+      appearance: none;
+      outline: none;
+      border-radius: 0;
+      opacity: 1;
+      cursor: pointer;
+
+      &::before,
+      &::after {
+        content: "";
+        display: block;
+        position: absolute;
+      }
+
+      &::before {
+        background-color: $palette-white;
+        border: 1px solid $palette-heavy-black;
+        border-radius: 3px;
+        height: 14px;
+        width: 14px;
+        left: 0px;
+        top: -2px;
+      }
+
+      &::after {
+        border-bottom: 2px solid $palette-white;
+        border-left: 2px solid $palette-white;
+        height: 4px;
+        width: 8px;
+        left: 3px;
+        top: 1px;
+        transform: rotate(-45deg);
+      }
+
+      &:checked::before {
+        background-color: $unified-cobalt-stone-blue;
+        border: 1px solid $unified-cobalt-stone-blue;
+      }
+
+      &:indeterminate {
+        &::before {
+          background-color: $unified-cobalt-stone-blue;
+          border: 1px solid $unified-cobalt-stone-blue;
+        }
+        &::after {
+          background-color: $palette-white;
+          border-radius: 2px;
+          width: 10px;
+          height: 2px;
+          top: 5px;
+          left: 3px;
+          border: 0;
+          transform: none;
+        }
+      }
+
+      &:hover {
+        @include hoverBase;
+      }
+    }
+
+    > span:not(:empty) {
+      margin: 0 0 0 8px;
+    }
+    &.disabled,
+    &.readOnly {
+      input.check[type="checkbox"] {
+        &::before {
+          border: 1px solid $unified-very-light-gray;
+        }
+        &:checked::before,
+        &:indeterminate::before {
+          background-color: $unified-very-light-gray;
+          border: 1px solid $unified-very-light-gray;
+        }
+      }
+    }
+    &.disabled {
+      @include disabledBase;
+    }
+    &.readOnly:not(.disabled) {
+    }
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
