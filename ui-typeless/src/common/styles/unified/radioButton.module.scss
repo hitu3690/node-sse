@@ -65,6 +65,10 @@
       }
     }
     &.disabled {
+      img {
+        filter: invert(72%) sepia(0%) saturate(0%) hue-rotate(321deg)
+          brightness(92%) contrast(96%);
+      }
       @include disabledBase;
     }
     &.readOnly:not(.disabled) {
