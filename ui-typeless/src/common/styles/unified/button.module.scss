@@ -1,0 +1,64 @@
+@import "../mixin";
+@import "../variables";
+
+.unifinedButton {
+  box-sizing: border-box;
+  font-size: 13px;
+  text-align: center;
+  border-radius: 3px;
+  border: solid 1px;
+  width: 100%;
+  height: 100%;
+  background-image: $unified-button-white-gradation;
+  color: $palette-heavy-black;
+  line-height: 1;
+  padding: 0;
+
+  > span {
+    line-height: 1;
+    vertical-align: middle;
+  }
+
+  > img {
+    height: 1.25em;
+    vertical-align: middle;
+  }
+
+  > svg {
+    font-size: 1.25em;
+    vertical-align: middle;
+  }
+
+  & .loadingIcon + svg,
+  & .loadingIcon + img,
+  & svg + span,
+  & span + svg,
+  & img + span,
+  & span + img {
+    margin-left: 0.5em;
+  }
+
+  .loadingIcon {
+    animation: spin 1.5s linear infinite;
+  }
+  &.loading {
+  }
+
+  &.loading,
+  &.disabled {
+    @include disabledBase;
+    background-color: $unified-very-light-gray;
+    border-color: $unified-very-light-gray;
+    background-image: none;
+
+    img {
+      filter: invert(72%) sepia(0%) saturate(0%) hue-rotate(321deg)
+        brightness(92%) contrast(96%);
+    }
+  }
+
+  &:hover {
+    @include hoverBase;
+    cursor: pointer;
+  }
+}

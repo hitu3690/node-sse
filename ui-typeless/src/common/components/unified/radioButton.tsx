@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import classNames from "classnames";
 import styles from "../../styles/unified/radioButton.module.scss";
 
