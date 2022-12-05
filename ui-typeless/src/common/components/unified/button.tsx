@@ -81,6 +81,26 @@ const IconText: React.FunctionComponent<{
     </>
   );
 
+const UnifinedButtonContent: React.FunctionComponent<
+  OnlyTextProps | FontAwesomeProps | OriginalIconProps
+> = (props) => {
+  if (isFontAwesomeButtonGuard(props)) {
+    return (
+      <IconText {...props} icon={<FontAwesomeIcon icon={props.fontAwesome} />}>
+        {props.children}
+      </IconText>
+    );
+  } else if (isOriginalIconButtonGuard(props)) {
+    return (
+      <IconText {...props} icon={<img src={props.src} />}>
+        {props.children}
+      </IconText>
+    );
+  } else {
+    return <span>{props.children}</span>;
+  }
+};
+
 const UnifinedBaseButton: React.FunctionComponent<UnifiedButtonProps> = (
   props
 ) => {
@@ -113,28 +133,6 @@ const UnifinedBaseButton: React.FunctionComponent<UnifiedButtonProps> = (
       </button>
     </div>
   );
-};
-
-const UnifinedButtonContent: React.FunctionComponent<
-  OnlyTextProps | FontAwesomeProps | OriginalIconProps
-> = (props) => {
-  if (isFontAwesomeButtonGuard(props)) {
-    console.log("====================", isFontAwesomeButtonGuard(props));
-
-    return (
-      <IconText {...props} icon={<FontAwesomeIcon icon={props.fontAwesome} />}>
-        {props.children}
-      </IconText>
-    );
-  } else if (isOriginalIconButtonGuard(props)) {
-    return (
-      <IconText {...props} icon={<img src={props.src} />}>
-        {props.children}
-      </IconText>
-    );
-  } else {
-    return <span>{props.children}</span>;
-  }
 };
 //# region end
 

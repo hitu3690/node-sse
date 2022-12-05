@@ -49,14 +49,38 @@ export const IconButtons = (args: ButtonKindProps) => (
     ></UnifiedButton>
     <br />
     <UnifiedButton src={searchSvg} onClick={() => {}}></UnifiedButton>
+    <br />
+    <UnifiedButton
+      fontAwesome={faArrowRight}
+      isLoading={true}
+      onClick={() => {}}
+    ></UnifiedButton>
+    <br />
+    <UnifiedButton
+      src={searchSvg}
+      isDisabled={true}
+      onClick={() => {}}
+    ></UnifiedButton>
   </>
 );
 
 export const IconAndTextButtons = (args: ButtonKindProps) => (
   <>
+    <UnifiedButton fontAwesome={faArrowRight} onClick={() => {}}>
+      FontAwesome-アイコン左
+    </UnifiedButton>
+    <br />
+    <UnifiedButton
+      src={searchSvg}
+      displayIconPosition={IconPosition.Right}
+      onClick={() => {}}
+    >
+      OriginalIcon-アイコン右
+    </UnifiedButton>
+    <br />
     <UnifiedButton
       fontAwesome={faArrowRight}
-      displayIconPosition={IconPosition.Left}
+      isDisabled={true}
       onClick={() => {}}
     >
       FontAwesome-アイコン左
@@ -65,6 +89,7 @@ export const IconAndTextButtons = (args: ButtonKindProps) => (
     <UnifiedButton
       src={searchSvg}
       displayIconPosition={IconPosition.Right}
+      isLoading={true}
       onClick={() => {}}
     >
       OriginalIcon-アイコン右

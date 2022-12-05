@@ -1,5 +1,6 @@
 @import "../mixin";
 @import "../variables";
+@import "../animation/spin.scss";
 
 .unifinedButton {
   box-sizing: border-box;
@@ -38,10 +39,10 @@
     margin-left: 0.5em;
   }
 
-  .loadingIcon {
-    animation: spin 1.5s linear infinite;
-  }
   &.loading {
+    .loadingIcon {
+      animation: $default-spin-animation;
+    }
   }
 
   &.loading,
