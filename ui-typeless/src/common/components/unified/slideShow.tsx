@@ -33,9 +33,9 @@ export const UnifiedSlideShow: React.FunctionComponent<
           <li
             key={index}
             style={{
-              background: `url(${item.img})`,
-              display: displayIndex === index ? "block" : "none",
+              backgroundImage: `url(${item.img})`,
             }}
+            className={displayIndex === index ? styles.currentShow : ""}
           ></li>
         ))}
         <div
