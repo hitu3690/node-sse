@@ -45,6 +45,7 @@
       width: 25px;
       &:hover {
         border-color: $unified-very-light-gray;
+        @include transitionBase;
       }
     }
     .slickPrev {
@@ -75,6 +76,7 @@
         outline: none;
         &:active {
           background-color: $unified-very-light-gray;
+          @include transitionBase;
         }
       }
       .currentShow {

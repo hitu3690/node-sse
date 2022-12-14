@@ -1,8 +1,12 @@
 @import "./_variables";
 
+@mixin transitionBase {
+  transition: all 0.2s;
+}
+
 @mixin hoverBase {
   opacity: 0.5;
-  transition: opacity 0.2s;
+  @include transitionBase;
 }
 
 @mixin inactiveBase {
