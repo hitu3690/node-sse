@@ -1,0 +1,104 @@
+@import "../mixin";
+@import "../variables";
+
+.unifiedCarousel {
+  display: flex;
+  flex-direction: column;
+  > h3 {
+    text-align: center;
+    letter-spacing: 0.1em;
+    color: #fff;
+    padding: 20px;
+  }
+  .slick {
+    position: relative;
+    transform: translate3d(0, 0, 0);
+    touch-action: pan-y;
+    > ul {
+      display: inline-flex;
+      overflow: hidden;
+      @include sliderTransition(transform);
+      > li {
+        transform: scale(0.8);
+        opacity: 0.5;
+        transition: all 0.5s;
+        > img {
+          width: 60vw;
+          height: auto;
+        }
+      }
+      .currentShow {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    .slickPrev,
+    .slickNext {
+      position: absolute;
+      cursor: pointer;
+      top: 42%;
+      outline: none;
+      border-top: 2px solid #fff;
+      border-right: 2px solid #fff;
+      height: 25px;
+      width: 25px;
+      z-index: 3;
+      &:hover {
+        border-color: $unified-very-light-gray;
+        @include cursorTransition(border-color);
+      }
+    }
+    .slickPrev {
+      left: 2.5%;
+      transform: rotate(-135deg);
+    }
+    .slickNext {
+      right: 2.5%;
+      transform: rotate(45deg);
+    }
+  }
+  .slickDots {
+    text-align: center;
+    > li {
+      display: inline-block;
+      margin: 0 5px;
+      > button {
+        cursor: pointer;
+        border-radius: 50%;
+        width: 8px;
+        height: 8px;
+        display: block;
+        background-color: $palette-white;
+        color: transparent;
+        outline: none;
+        &:active {
+          background-color: $unified-very-light-gray;
+          @include cursorTransition(background-color);
+        }
+      }
+      .currentShow {
+        background-color: $palette-black;
+      }
+    }
+  }
+}
+
+//# global style
+body {
+  background: $unified-very-light-gray;
+}
+ul,
+button {
+  margin: 0;
+  padding: 0;
+}
+button {
+  border: none;
+}
+ul {
+  list-style: none;
+}
+img {
+  border-style: none;
+}
+//# region end

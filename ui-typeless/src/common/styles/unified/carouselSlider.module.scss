@@ -1,0 +1,32 @@
+@import "../mixin";
+@import "../variables";
+@import "../animation/slider";
+
+.unifiedCarouselSlider {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  .slide {
+    width: 100%;
+    > img {
+      width: 100%;
+      height: auto;
+      vertical-align: top;
+    }
+  }
+  .slideWrapMain {
+    width: 100%;
+    z-index: 1;
+    // animation: css-carousel-slider-main6 30s infinite;
+    // animation-delay: 2s;
+  }
+  .slideWrap {
+    position: absolute;
+    display: flex;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    // animation: css-carousel-slider6 30s infinite;
+    // animation-delay: 2s;
+  }
+}
