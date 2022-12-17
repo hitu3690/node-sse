@@ -29,10 +29,12 @@ export const UnifiedCarousel: React.FunctionComponent<UnifiedCarouselProps> = (
             )
           }
         ></div>
-        <ul
+        <div
           style={{
-            transform: `translate3d(-${(displayIndex + 1) * 9}%, 0 , 0)`,
+            width: `calc(${props.items.length} * 100%)`,
+            transform: `translateX(calc(-7% + ${displayIndex * -60}vw))`,
           }}
+          className={styles.sliderItems}
         >
           <li
             className={
@@ -52,7 +54,7 @@ export const UnifiedCarousel: React.FunctionComponent<UnifiedCarouselProps> = (
           <li className={displayIndex === 0 ? styles.currentShow : ""}>
             <img src={props.items[0].img} />
           </li>
-        </ul>
+        </div>
         <div
           className={styles.slickNext}
           onClick={() =>

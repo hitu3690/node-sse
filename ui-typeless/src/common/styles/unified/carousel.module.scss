@@ -1,5 +1,6 @@
 @import "../mixin";
 @import "../variables";
+@import "../animation/slider";
 
 .unifiedCarousel {
   display: flex;
@@ -12,11 +13,12 @@
   }
   .slick {
     position: relative;
-    transform: translate3d(0, 0, 0);
-    touch-action: pan-y;
-    > ul {
-      display: inline-flex;
-      overflow: hidden;
+    width: 100%;
+    overflow: hidden;
+    .sliderItems {
+      display: flex;
+      // animation: css-carousel-slider6 30s infinite;
+      // animation-delay: 2s;
       @include sliderTransition(transform);
       > li {
         transform: scale(0.8);
@@ -28,6 +30,10 @@
         }
       }
       .currentShow {
+        // position: absolute;
+        // top: 0;
+        // left: 20%;
+        // z-index: 1;
         opacity: 1;
         transform: scale(1);
       }
@@ -95,7 +101,8 @@ button {
 button {
   border: none;
 }
-ul {
+ul,
+li {
   list-style: none;
 }
 img {
