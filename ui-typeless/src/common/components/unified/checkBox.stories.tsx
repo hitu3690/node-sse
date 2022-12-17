@@ -1,5 +1,5 @@
-import React, { useCallback, useMemo, useState } from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { useMemo, useState } from "react";
+import { ComponentMeta } from "@storybook/react";
 
 import { UnifiedCheckBox, UnifiedCheckBoxProps } from "./checkBox";
 
@@ -24,31 +24,39 @@ export const UnifiedCheckBoxes = (args: UnifiedCheckBoxProps) => {
 };
 
 export const IndeterminateCheckBox = (args: UnifiedCheckBoxProps) => {
-  const [state1, set_state1] = useState(true)
-  const [state2, set_state2] = useState(true)
-  const [stateAll, set_stateAll] = useState(true)
+  const [state1, set_state1] = useState(true);
+  const [state2, set_state2] = useState(true);
+  const [stateAll, set_stateAll] = useState(true);
   const isIndeterminate = useMemo(() => {
-    return !(state1 && state2)
-  }, [state1, state2])
+    return !(state1 && state2);
+  }, [state1, state2]);
 
   return (
     <>
       <UnifiedCheckBox
         {...args}
         onChange={() => {
-          set_state1(!state1)
-          set_state2(!state2)
-          set_stateAll(!stateAll)
+          set_state1(!state1);
+          set_state2(!state2);
+          set_stateAll(!stateAll);
         }}
         isChecked={stateAll}
         indeterminate={isIndeterminate}
       >
         すべて
       </UnifiedCheckBox>
-      <UnifiedCheckBox {...args} onChange={() => set_state1(!state1)} isChecked={state1}>
+      <UnifiedCheckBox
+        {...args}
+        onChange={() => set_state1(!state1)}
+        isChecked={state1}
+      >
         切削
       </UnifiedCheckBox>
-      <UnifiedCheckBox {...args} onChange={() => set_state2(!state2)} isChecked={state2}>
+      <UnifiedCheckBox
+        {...args}
+        onChange={() => set_state2(!state2)}
+        isChecked={state2}
+      >
         板金
       </UnifiedCheckBox>
     </>

@@ -1,12 +1,10 @@
-import React, { useCallback, useMemo, useState } from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { ComponentMeta } from "@storybook/react";
 
 import {
   ButtonHeight,
   ButtonKindProps,
   IconPosition,
   UnifiedButton,
-  UnifiedButtonProps,
 } from "./button";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import searchSvg from "../../../assets/search.svg";
