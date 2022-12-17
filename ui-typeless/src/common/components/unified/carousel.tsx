@@ -23,6 +23,9 @@ export const UnifiedCarousel: React.FunctionComponent<UnifiedCarouselProps> = (
       <div className={styles.slick}>
         <div
           className={styles.slickPrev}
+          style={{
+            pointerEvents: props.items.length === 1 ? "none" : "initial",
+          }}
           onClick={() =>
             setDisplayIndex(
               displayIndex === 0 ? props.items.length - 1 : displayIndex - 1
@@ -32,7 +35,7 @@ export const UnifiedCarousel: React.FunctionComponent<UnifiedCarouselProps> = (
         <div
           style={{
             width: `calc(${props.items.length} * 100%)`,
-            transform: `translateX(calc(-7% + ${displayIndex * -60}vw))`,
+            transform: `translateX(calc(-41vw + ${displayIndex * -60}vw))`,
           }}
           className={styles.sliderItems}
         >
@@ -40,23 +43,36 @@ export const UnifiedCarousel: React.FunctionComponent<UnifiedCarouselProps> = (
             className={
               displayIndex === props.items.length - 1 ? styles.currentShow : ""
             }
+            style={{ display: props.items.length === 1 ? "none" : "" }}
+            onClick={() => setDisplayIndex(props.items.length - 1)}
           >
-            <img src={props.items[props.items.length - 1].img} />
+            <img src={props.items[props.items.length - 1].img} alt="" />
           </li>
           {props.items.map((item, index) => (
             <li
               key={index}
               className={displayIndex === index ? styles.currentShow : ""}
+              style={{ display: props.items.length === 1 ? "none" : "" }}
+              onClick={() => setDisplayIndex(index)}
             >
-              <img src={item.img} />
+              <img src={item.img} alt="" />
             </li>
           ))}
-          <li className={displayIndex === 0 ? styles.currentShow : ""}>
-            <img src={props.items[0].img} />
+          <li
+            className={displayIndex === 0 ? styles.currentShow : ""}
+            style={{
+              transform: props.items.length === 1 ? "translateX(25%)" : "",
+            }}
+            onClick={() => setDisplayIndex(0)}
+          >
+            <img src={props.items[0].img} alt="" />
           </li>
         </div>
         <div
           className={styles.slickNext}
+          style={{
+            pointerEvents: props.items.length === 1 ? "none" : "initial",
+          }}
           onClick={() =>
             setDisplayIndex(
               props.items.length - 1 === displayIndex ? 0 : displayIndex + 1
