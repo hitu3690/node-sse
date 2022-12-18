@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../../styles/unified/carousel.module.scss";
 
 export interface UnifiedCarouselProps {
@@ -9,6 +9,8 @@ export interface UnifiedCarouselProps {
     img: string;
     url?: string;
   }[];
+  isInfinite?: boolean;
+  slideTime?: number;
   children?: React.ReactNode;
 }
 
@@ -16,6 +18,17 @@ export const UnifiedCarousel: React.FunctionComponent<UnifiedCarouselProps> = (
   props
 ) => {
   const [displayIndex, setDisplayIndex] = useState(0);
+
+  useEffect(() => {
+    if (props.isInfinite !== undefined && props.isInfinite) {
+      const intervalId = setInterval(() => {
+        setDisplayIndex((displayIndex) =>
+          displayIndex === props.items.length - 1 ? 0 : displayIndex + 1
+        );
+      }, props.slideTime ?? 5000);
+      return () => clearInterval(intervalId);
+    }
+  }, [displayIndex]);
 
   return (
     <div className={classNames(styles.unifiedCarousel, props.className)}>

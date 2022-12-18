@@ -34,6 +34,7 @@ export const UnifiedCarousels = (args: UnifiedCarouselProps) => {
       <UnifiedCarousel
         title={"Carousel"}
         items={slideShowItems}
+        isInfinite={true}
       ></UnifiedCarousel>
     </>
   );

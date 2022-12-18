@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { useEffect } from "react";
 import { useState } from "react";
 import styles from "../../styles/unified/slideShow.module.scss";
 
@@ -9,6 +10,8 @@ export interface UnifiedSlideShowProps {
     img: string;
     url?: string;
   }[];
+  isInfinite?: boolean;
+  slideTime?: number;
   children?: React.ReactNode;
 }
 
@@ -16,6 +19,17 @@ export const UnifiedSlideShow: React.FunctionComponent<
   UnifiedSlideShowProps
 > = (props) => {
   const [displayIndex, setDisplayIndex] = useState(0);
+
+  useEffect(() => {
+    if (props.isInfinite !== undefined && props.isInfinite) {
+      const intervalId = setInterval(() => {
+        setDisplayIndex((displayIndex) =>
+          displayIndex === props.items.length - 1 ? 0 : displayIndex + 1
+        );
+      }, props.slideTime ?? 5000);
+      return () => clearInterval(intervalId);
+    }
+  }, [displayIndex]);
 
   return (
     <div className={classNames(styles.unifiedSlideShow, props.className)}>
