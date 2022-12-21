@@ -9,6 +9,7 @@
 }
 
 @mixin hoverBase {
+  cursor: pointer;
   opacity: 0.5;
   @include cursorTransition;
 }
