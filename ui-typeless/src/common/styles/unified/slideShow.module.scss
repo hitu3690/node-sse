@@ -1,0 +1,101 @@
+@import "../mixin";
+@import "../variables";
+
+.unifiedSlideShow {
+  position: relative;
+  z-index: 1;
+  height: 100vh;
+  > h1 {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 6vw;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+  }
+  .slick {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    > li {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      @include slideBase;
+    }
+    .currentShow {
+      opacity: 1;
+    }
+    .slickPrev,
+    .slickNext {
+      position: absolute;
+      z-index: 3;
+      top: 42%;
+      cursor: pointer;
+      outline: none;
+      border-top: 2px solid #fff;
+      border-right: 2px solid #fff;
+      height: 25px;
+      width: 25px;
+      &:hover {
+        border-color: $unified-very-light-gray;
+        @include cursorTransition(border-color);
+      }
+    }
+    .slickPrev {
+      left: 2.5%;
+      transform: rotate(-135deg);
+    }
+    .slickNext {
+      right: 2.5%;
+      transform: rotate(45deg);
+    }
+  }
+  .slickDots {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    margin: -50px 0 0 0;
+    > li {
+      display: inline-block;
+      margin: 0 5px;
+      > button {
+        cursor: pointer;
+        border-radius: 50%;
+        width: 8px;
+        height: 8px;
+        display: block;
+        background-color: $palette-white;
+        color: transparent;
+        outline: none;
+        &:active {
+          background-color: $unified-very-light-gray;
+          @include cursorTransition(background-color);
+        }
+      }
+      .currentShow {
+        background-color: $palette-black;
+      }
+    }
+  }
+}
+
+//# global style
+ul,
+button {
+  margin: 0;
+  padding: 0;
+}
+button {
+  border: none;
+}
+ul {
+  list-style: none;
+}
+//# region end

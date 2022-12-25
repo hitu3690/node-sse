@@ -1,15 +1,12 @@
 import { createModule } from "typeless";
-import { from, map } from "typeless/rx";
+import * as Rx from "typeless/rx";
 
 import axios from "axios";
 import { TodoSymbol } from "./todoSymbol";
+// import { apiResultHandler } from "../../logics/apiResultHandler";
+import { TodoRes } from "../../models/todos/todoRes";
+import TodoApi from "../../api/todoApi";
 
-export interface TodoResponse {
-  body: string;
-  id: number;
-  title: string;
-  userId: number;
-}
 export interface Todo {
   id: number;
   title: string;
@@ -39,9 +36,12 @@ const createTodoModule = () => {
     });
 
   useTodoModule.epic().on(TodoActions.fetchTodo, () => {
-    return from(axios.get("https://jsonplaceholder.typicode.com/posts")).pipe(
-      map(({ data }) => {
-        const newTodos = data.map((item: TodoResponse) => {
+    return Rx.fromPromise(
+      axios.get("https://jsonplaceholder.typicode.com/posts")
+    ).pipe(
+      Rx.map((res) => {
+        console.log({ res });
+        const newTodos = res.data.map((item: TodoRes) => {
           return {
             id: item.id,
             title: item.title,
@@ -53,6 +53,23 @@ const createTodoModule = () => {
       })
     );
   });
+  // .on(TodoActions.fetchTodo, () => {
+  //   return Rx.fromPromise(
+  //     axios.get("https://jsonplaceholder.typicode.com/posts")
+  //   ).pipe(
+  //     Rx.map(({ data }) => {
+  //       const newTodos = data.map((item: TodoRes) => {
+  //         return {
+  //           id: item.id,
+  //           title: item.title,
+  //           completed: false,
+  //           userId: item.userId,
+  //         };
+  //       });
+  //       return TodoActions.fetchTodoFullfilled(newTodos);
+  //     })
+  //   );
+  // });
 
   return { useTodoModule, TodoActions, getTodoState };
 };
