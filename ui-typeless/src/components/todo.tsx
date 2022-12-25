@@ -5,6 +5,8 @@ import {
   TodoActions,
   useTodoModule,
 } from "../features/todo/todoModule";
+import style from "../styles/components/todo.module.scss";
+import TodoApi from "../api/todoApi";
 
 export const TodoContainer: React.FC = () => {
   useTodoModule();
@@ -12,11 +14,12 @@ export const TodoContainer: React.FC = () => {
   const { fetchTodo } = useActions(TodoActions);
 
   useEffect(() => {
+    TodoApi.todoList();
     fetchTodo();
   }, []);
 
   return (
-    <div>
+    <div className={style.todoContainer}>
       <ul>
         {todos.map((todo) => {
           return <li key={todo.id}>{todo.title}</li>;

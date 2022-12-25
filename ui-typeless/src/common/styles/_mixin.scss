@@ -1,0 +1,31 @@
+@import "./_variables";
+
+@mixin cursorTransition($target: opacity) {
+  transition: $target 0.2s;
+}
+
+@mixin sliderTransition($target: opacity) {
+  transition: $target 1000ms 0s ease;
+}
+
+@mixin hoverBase {
+  cursor: pointer;
+  opacity: 0.5;
+  @include cursorTransition;
+}
+
+@mixin inactiveBase {
+  cursor: default;
+  transition: none;
+  pointer-events: none;
+}
+
+@mixin disabledBase {
+  @include inactiveBase;
+  color: $palette-disabled;
+}
+
+@mixin slideBase {
+  opacity: 0;
+  @include sliderTransition;
+}
