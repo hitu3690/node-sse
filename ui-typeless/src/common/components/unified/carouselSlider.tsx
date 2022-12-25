@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "../../styles/unified/carouselSlider.module.scss";
 
 const TRANSOFORMING_DISPLAY_INDEX_TIME = 600;
@@ -25,9 +25,10 @@ export const UnifiedCarouselSlider: React.FunctionComponent<
   useEffect(() => {
     if (props.isInfinite !== undefined && props.isInfinite) {
       const intervalId = setInterval(() => {
-        setDisplayIndex((displayIndex) =>
-          displayIndex === props.items.length - 1 ? 0 : displayIndex + 1
-        );
+        setDisplayIndex(() => {
+          carouselSliderRef.current!.style.transitionDuration = "0.5s";
+          return displayIndex + 1;
+        });
       }, props.slideTime ?? 5000);
       return () => clearInterval(intervalId);
     }

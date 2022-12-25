@@ -37,7 +37,7 @@ export const UnifiedCarouselSliders = (args: UnifiedCarouselSliderProps) => {
       <UnifiedCarouselSlider
         title={"Carousel"}
         items={slideShowItems}
-        isInfinite={false}
+        isInfinite={true}
       ></UnifiedCarouselSlider>
     </>
   );
