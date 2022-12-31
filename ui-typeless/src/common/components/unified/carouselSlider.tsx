@@ -3,6 +3,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import styles from "../../styles/unified/carouselSlider.module.scss";
 
 const TRANSOFORMING_DISPLAY_INDEX_TIME = 501;
+const CURRENT_DISPLAY_SLIDE_WIDTH = 449;
 
 export interface UnifiedCarouselSliderProps {
   className?: string;
@@ -65,7 +66,9 @@ export const UnifiedCarouselSlider: React.FunctionComponent<
           ref={carouselSliderRef}
           style={{
             width: `${(props.items.length + 3) * 100}%`,
-            transform: `translate3d(-${(displayIndex + 1) * 449}px, 0px, 0px)`,
+            transform: `translate3d(-${
+              (displayIndex + 1) * CURRENT_DISPLAY_SLIDE_WIDTH
+            }px, 0px, 0px)`,
           }}
         >
           <li>
