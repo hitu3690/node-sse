@@ -1,0 +1,84 @@
+.unifiedInputTypeNumber {
+  position: relative;
+  height: 100%;
+  border-radius: 3px;
+  display: inline-block;
+  box-sizing: border-box;
+  color: $palette-black;
+  border: solid 1px $unified-very-light-gray;
+  background-color: $palette-white;
+
+  &:focus-within {
+    border: 1px solid $unified-pacific-blue;
+  }
+
+  > input {
+    font-size: 13px;
+    width: 100%;
+    height: 100%;
+    appearance: none;
+    box-sizing: border-box;
+    padding: 0 32px 0 8px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+
+    &:focus {
+      border: 1px solid transparent;
+    }
+
+    &:focus-visible {
+      outline: none;
+    }
+
+    button {
+      position: absolute;
+      width: 16px;
+      padding: 0;
+      height: 8px;
+      right: 8px;
+      margin: 0;
+      border: 0px;
+      cursor: default;
+      outline: none;
+      background-color: $unified-white-smoke;
+
+      &.upper {
+        top: calc(50% - 8px);
+        img {
+          bottom: 1px;
+          transform: translateX(-50%) rotateX(180deg);
+        }
+      }
+
+      &.lower {
+        bottom: calc(50% - 8px);
+        img {
+          top: 1px;
+          transform: translateX(-50%);
+        }
+      }
+
+      img {
+        position: absolute;
+        left: 50%;
+      }
+    }
+  }
+
+  &.disabled,
+  &.readOnly {
+    border: none;
+    > input {
+      opacity: 1 !important;
+      @include mixin.disabledBase;
+      padding-left: 9px; // 8px + divのborder1px
+      background-color: $unified-gray95;
+      border: solid 1px $palette-very-light-gray;
+    }
+  }
+  &.readOnly:not(.disabled) {
+    > input {
+      @include mixin.readOnlyBase;
+    }
+  }
+}

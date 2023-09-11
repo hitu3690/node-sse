@@ -1,8 +1,9 @@
 import classNames from "classnames";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import styles from "../../styles/unified/carouselSlider.module.scss";
 
-const TRANSOFORMING_DISPLAY_INDEX_TIME = 600;
+const TRANSOFORMING_DISPLAY_INDEX_TIME = 501;
+const CURRENT_DISPLAY_SLIDE_WIDTH = 449;
 
 export interface UnifiedCarouselSliderProps {
   className?: string;
@@ -32,21 +33,31 @@ export const UnifiedCarouselSlider: React.FunctionComponent<
       }, props.slideTime ?? 5000);
       return () => clearInterval(intervalId);
     }
-  }, [displayIndex]);
+  }, [displayIndex, props.isInfinite, props.slideTime]);
 
   useEffect(() => {
-    if (displayIndex === props.items.length) {
+    if (displayIndex >= props.items.length) {
       setTimeout(() => {
         setDisplayIndex(() => 0);
       }, TRANSOFORMING_DISPLAY_INDEX_TIME);
     }
-    if (displayIndex === -1) {
+    if (displayIndex <= -1) {
       setTimeout(() => {
         setDisplayIndex(() => props.items.length - 1);
       }, TRANSOFORMING_DISPLAY_INDEX_TIME);
+    } else {
+      carouselSliderRef.current!.style.transitionDuration = "0s";
     }
-    carouselSliderRef.current!.style.transitionDuration = "0s";
-  }, [displayIndex]);
+  }, [displayIndex, props.items.length]);
+
+  const handleSlideShow = useCallback(
+    (targetIndex: number) => {
+      if (displayIndex >= props.items.length || displayIndex <= -1) return;
+      carouselSliderRef.current!.style.transitionDuration = "0.5s";
+      setDisplayIndex(() => targetIndex);
+    },
+    [displayIndex, props.items.length]
+  );
 
   return (
     <div className={classNames(styles.unifiedCarouselSlider, props.className)}>
@@ -55,7 +66,9 @@ export const UnifiedCarouselSlider: React.FunctionComponent<
           ref={carouselSliderRef}
           style={{
             width: `${(props.items.length + 3) * 100}%`,
-            transform: `translate3d(-${(displayIndex + 1) * 449}px, 0px, 0px)`,
+            transform: `translate3d(-${
+              (displayIndex + 1) * CURRENT_DISPLAY_SLIDE_WIDTH
+            }px, 0px, 0px)`,
           }}
         >
           <li>
@@ -72,37 +85,18 @@ export const UnifiedCarouselSlider: React.FunctionComponent<
         </ul>
         <button
           className={styles.prev}
-          onClick={() =>
-            setDisplayIndex(() => {
-              carouselSliderRef.current!.style.transitionDuration = "0.5s";
-              return displayIndex - 1;
-            })
-          }
+          onClick={() => handleSlideShow(displayIndex - 1)}
         ></button>
         <button
           className={styles.next}
-          onClick={() =>
-            setDisplayIndex(() => {
-              carouselSliderRef.current!.style.transitionDuration = "0.5s";
-              return displayIndex + 1;
-            })
-          }
+          onClick={() => handleSlideShow(displayIndex + 1)}
         ></button>
       </div>
       <div className={styles.thumbnailSlides}>
         <div>
           <ul>
             {props.items.map((item, index) => (
-              <li
-                key={index}
-                onClick={() =>
-                  setDisplayIndex(() => {
-                    carouselSliderRef.current!.style.transitionDuration =
-                      "0.5s";
-                    return index;
-                  })
-                }
-              >
+              <li key={index} onClick={() => handleSlideShow(index)}>
                 <img src={item.img} alt="" />
               </li>
             ))}

@@ -10,6 +10,10 @@
     display: inline-block;
     line-height: 1.2;
 
+    > span:not(:empty) {
+      margin: 0 0 0 8px;
+    }
+
     input.check[type="checkbox"] {
       position: relative;
       left: unset; // base_cssを打ち消し
